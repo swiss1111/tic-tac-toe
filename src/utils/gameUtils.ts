@@ -1,16 +1,22 @@
 export function parseTableData(board: string): {table: number[][], size:number} {
-  let data = {
+  const data = {
     table: [],
     size: 3
-  }
+  } as any
 
   data.size = Math.sqrt(board.length);
 
-  for(let i = 0; i < board.length; ++i) {
-    let row = [];
+  const array: number[][] = [];
 
-    data.table.push()
+  for (let i = 0; i < data.size; i++) {
+    const row: number[] = [];
+    for (let j = 0; j < data.size; j++) {
+      row.push(Number(board[i * data.size + j]));
+    }
+    array.push(row);
   }
+
+  data.table = array;
 
   return data;
 }

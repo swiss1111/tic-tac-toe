@@ -1,5 +1,5 @@
 <script lang="ts">
-import {boardStringify, getWinner} from '@/utils/gameUtils'
+import {boardStringify, getWinner, parseTableData} from '@/utils/gameUtils'
 import axios from "axios";
 
 export default {
@@ -95,12 +95,12 @@ export default {
     }
   },
   async mounted() {
-    console.log("mounted", this.$route.params);
     if (this.$route?.params?.id) {
       let resp = await axios.get("http://localhost:5000/boards/" + this.$route?.params?.id);
-      console.log("mounted data", resp.data);
+      const tableData = parseTableData(resp.data.board)
+      this.table = tableData.table;
+      this.size = tableData.size;
     }
-
     this.createTable()
   }
 }
